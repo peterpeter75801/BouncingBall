@@ -161,7 +161,7 @@ public class Balls {
      */
     public void launchABall() {
         if( numberOfBalls >= sizeOfBallsArray ) {
-            return;
+            increaseSizeOfBallsArray();
         }
        
         ballsCenterX[ numberOfBalls ] = LAUNCH_POSITION_X;
@@ -234,6 +234,45 @@ public class Balls {
                 break;
             default:
                 break;
+        }
+    }
+    
+    /**
+     * double the size of ball's array
+     */
+    private void increaseSizeOfBallsArray() {
+        double oldsizeOfBallsArray = sizeOfBallsArray;
+        double oldBallsCenterX[] = new double[ sizeOfBallsArray ];
+        double oldBallsCenterY[] = new double[ sizeOfBallsArray ];
+        double oldBallsSpeedX[] = new double[ sizeOfBallsArray ];
+        double oldBallsSpeedY[] = new double[ sizeOfBallsArray ];
+        Color oldBallsColor[] = new Color[ sizeOfBallsArray ];
+        Color oldBallsBorderColor[] = new Color[ sizeOfBallsArray ];
+        
+        for( int i = 0; i < sizeOfBallsArray; i++ ) {
+            oldBallsCenterX[ i ] = ballsCenterX[ i ];
+            oldBallsCenterY[ i ] = ballsCenterY[ i ];
+            oldBallsSpeedX[ i ] = ballsSpeedX[ i ];
+            oldBallsSpeedY[ i ] = ballsSpeedY[ i ];
+            oldBallsColor[ i ] = ballsColor[ i ];
+            oldBallsBorderColor[ i ] = ballsBorderColor[ i ];
+        }
+        
+        sizeOfBallsArray *= 2;
+        ballsCenterX = new double[ sizeOfBallsArray ];
+        ballsCenterY = new double[ sizeOfBallsArray ];
+        ballsSpeedX = new double[ sizeOfBallsArray ];
+        ballsSpeedY = new double[ sizeOfBallsArray ];
+        ballsColor = new Color[ sizeOfBallsArray ];
+        ballsBorderColor = new Color[ sizeOfBallsArray ];
+        
+        for( int i = 0; i < oldsizeOfBallsArray; i++ ) {
+            ballsCenterX[ i ] = oldBallsCenterX[ i ];
+            ballsCenterY[ i ] = oldBallsCenterY[ i ];
+            ballsSpeedX[ i ] = oldBallsSpeedX[ i ];
+            ballsSpeedY[ i ] = oldBallsSpeedY[ i ];
+            ballsColor[ i ] = oldBallsColor[ i ];
+            ballsBorderColor[ i ] = oldBallsBorderColor[ i ];
         }
     }
    
